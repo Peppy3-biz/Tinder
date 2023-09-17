@@ -3,7 +3,7 @@ from time import sleep
 
 
 webdriver = webdriver.Chrome()
-def openTinder():
+def open_tinder():
     webdriver.get('https://tinder.com')
 
     sleep(.87)
@@ -34,17 +34,11 @@ def openTinder():
 
     sleep(1)
 
-openTinder()
-
-def messageWaitingGirl():
-    print("Test")
+    sleep(99)
 
 
-running = 'yes'
 
-while running == 'yes':
-    command = input('What should I do now?')
-    if command == 'message':
-        messageWaitingGirl()
 
+
+open_tinder()
 
