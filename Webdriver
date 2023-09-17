@@ -1,0 +1,16 @@
+from selenium import webdriver
+from time import sleep
+
+class TinderBot():
+    def __init__(self):
+        self.driver = webdriver.Chrome()
+    def open_tinder(self):
+        self.driver.get('https://tinder.com')
+
+        sleep(2)
+
+        login = self.driver.find_element('xpath', 'INSERT_XPATH')
+        login.click()
+
+
+        
