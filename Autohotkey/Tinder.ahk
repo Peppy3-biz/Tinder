@@ -42,12 +42,12 @@ F1::
 
     Sleep, 9000
 
-; copyOpener
+; copy generated opener
 x := 1378
 y := 300
 y_distance := 14
 
-Loop, 25 ; repeat 25 times
+Loop, 25 ; repeat 25 times to find copy button
 {
     ; copy response
     Sleep, 38
