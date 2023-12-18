@@ -1,0 +1,17 @@
+import pyautogui
+
+# Load the image file (the screenshot of the GUI element)
+image_path = r'C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TraitsReference\Movies.png'
+
+location = pyautogui.locateOnScreen(image_path, confidence=0.9)
+
+if location:
+    print("it worked, nice")
+
+    # Get the center of the image
+    center = pyautogui.center(location)
+
+    # Click the center of the image
+    pyautogui.click(center)
+else:
+    print("Image not found")

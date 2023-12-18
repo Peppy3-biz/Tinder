@@ -1,0 +1,36 @@
+import pyautogui
+
+def find_all_instances(image_path, searchRegion, confidenceLevel):
+    return list(pyautogui.locateAllOnScreen(image_path, region=searchRegion, confidence=confidenceLevel))
+
+searchRegion = (480, 240, 1420-480, 700)
+
+myTextImage = r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TextingFunctionality\myMessage.png"
+herTextImage = r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TextingFunctionality\herMessage.png"
+
+instances_myText = find_all_instances(myTextImage, searchRegion, 0.95)
+instances_herText = find_all_instances(herTextImage, searchRegion, 0.9)
+
+# Combine and sort instances
+all_instances = instances_myText + instances_herText
+all_instances.sort(key=lambda box: box.top)
+
+# Determine the next action based on the lowest instances
+if all_instances:
+    if all_instances[0] in instances_myText:
+        print("The lowest instance is myText.")
+        textStatus = 'Waiting'
+    else:
+        print("The lowest instance is herText.")
+        textStatus = 'Due'
+else:
+    print("No instances found.")
+    textStatus = 'Due'
+
+# Take action based on textStatus
+if textStatus == 'Due':
+    # Get all the text data to be used as a prompt
+    pass
+elif textStatus == 'Waiting':
+    # Do nothing
+    pass
