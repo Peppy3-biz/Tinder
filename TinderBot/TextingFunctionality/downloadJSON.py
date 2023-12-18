@@ -3,11 +3,19 @@ import pygetwindow as gw
 from pywinauto.application import Application
 from time import sleep
 
+for window in gw.getAllTitles():
+    if "Tinder | Dating," in window:
+        window_name = window
+
 # Name of the window you want to focus
-window_name = "Tinder | Dating, Make Friends & Meet New People and 7 more pages - Personal - Microsoft​ Edge"
+#window_name = "Tinder | Dating, Make Friends & Meet New People and 7 more pages - Personal - Microsoft​ Edge"
 
 # Find the window
+#try: 
 window = gw.getWindowsWithTitle(window_name)[0]
+'''except:
+    window_name = 
+print(window)'''
 
 # Focus the window
 if window is not None:
@@ -16,7 +24,7 @@ if window is not None:
     app_window.set_focus()
 
 
-networkImage = r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TextingFunctionality\networkTab.png"
+networkImage = r"C:\Users\Unhap\OneDrive\Documents\GitHub\Tinder\TinderBot\TextingFunctionality\networkTab.png"
 networkTabLocation = pyautogui.locateOnScreen(networkImage)
 if networkTabLocation:
     pyautogui.click(networkTabLocation)
