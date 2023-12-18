@@ -1,0 +1,10 @@
+from selenium import webdriver
+from time import sleep
+
+webdriver = webdriver.Chrome()
+def openTinder():
+    webdriver.get('https://tinder.com')
+
+    sleep(.88)
+
+    #rejectCookies.click() = webdriver.find_element()    

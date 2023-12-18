@@ -1,0 +1,43 @@
+import pyautogui
+from keyboard import is_pressed
+from time import sleep
+
+target_image = r"C:\Users\Unhap\OneDrive\QuickUse\pyAutoGUI\halfTarget.png"
+backupImage = r"C:\Users\Unhap\OneDrive\QuickUse\pyAutoGUI\target2.0.png"
+searchRegion = (460, 260, 1460, 865)
+startButton = r"C:\Users\Unhap\OneDrive\QuickUse\pyAutoGUI\startButton.png"
+tinyTarget = r"C:\Users\Unhap\OneDrive\QuickUse\pyAutoGUI\tinyTarget.png"
+location = False
+lastLocation = False
+
+while location == False:
+    location = pyautogui.locateOnScreen(startButton, region=searchRegion, confidence=0.7)
+    if location:
+        center = pyautogui.center(location)
+        pyautogui.click(center)
+        lastLocation = location
+
+while True:
+    location = pyautogui.locateOnScreen(tinyTarget, region=searchRegion, confidence=0.6)
+    if location != lastLocation and location:
+        center = pyautogui.center(location)
+        pyautogui.click(center)
+        lastLocation = location
+    else:
+        location = pyautogui.locateOnScreen(target_image, region=searchRegion, confidence=0.35)
+        if location != lastLocation and location:
+            center = pyautogui.center(location)
+            pyautogui.click(center)
+            lastLocation = location
+
+        location = pyautogui.locateOnScreen(backupImage, region=searchRegion, confidence=0.2)
+        if location != lastLocation and location:
+            center = pyautogui.center(location)
+            pyautogui.click(center)
+            lastLocation = location
+
+    # Check if 'q' key is pressed
+    if is_pressed('q'):
+        print("You pressed 'q'. Exiting the loop.")
+        break
+    sleep(.01)

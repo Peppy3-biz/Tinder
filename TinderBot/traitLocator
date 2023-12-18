@@ -1,0 +1,35 @@
+import pyautogui
+from random import uniform
+import time
+
+image_paths = {
+    'Better in person':r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TraitsReference\Better in person.png", 
+    'Movies':r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TraitsReference\Movies.png", 
+    'Walking':r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TraitsReference\Walking.png", 
+    'Language Exchange':r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TraitsReference\Language Exchange.png", 
+    'Short-term fun':r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TraitsReference\Short-term fun.png",
+
+    }
+traits = []
+
+def addTraits():
+    global breakLoop
+    end = False
+    for trait in image_paths:
+        if pyautogui.locateOnScreen(image_paths.get(trait), confidence = 0.9):
+            traits.append(trait)
+            end = True
+        print(traits)
+        if end == True:
+            breakLoop = True
+    print()
+    print("Conclusion: ",end='')
+    print(traits)
+
+breakLoop = False
+    
+while True:
+    addTraits()
+    time.sleep(uniform(.1,.25))
+    if breakLoop == True:
+        break

@@ -1,0 +1,41 @@
+import pyautogui
+
+def find_lowest_instance(image_path, searchRegion, confidenceLevel):
+    instances = list(pyautogui.locateAllOnScreen(image_path, region=searchRegion, confidence=confidenceLevel))
+    if not instances:
+        return None
+    return max(instances, key=lambda box: box.top)
+
+searchRegion = (480, 240, 1420, 880)
+
+myTextImage = r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TextingFunctionality\myMessage.png"
+herTextImage = r"C:\Users\Unhap\OneDrive\QuickUse\TinderBot\TextingFunctionality\herMessage.png"
+
+lowest_myText = find_lowest_instance(myTextImage, searchRegion, 0.95)
+lowest_herText = find_lowest_instance(herTextImage, searchRegion, 0.9)
+
+# Compare the lowest instances and determine which is lower
+if lowest_myText and lowest_herText:
+    if lowest_myText.top > lowest_herText.top:
+        print("The lowest herText is lower than the lowest myText.")
+        textStatus = 'Due'
+    else:
+        print("The lowest myText is lower than the lowest herText.")
+        textStatus = 'Waiting'
+elif lowest_myText:
+    print("Only myText was found, and it's the lowest.")
+    textStatus = 'Waiting'
+elif lowest_herText:
+    print("Only herText was found, and it's the lowest.")
+    textStatus = 'Due'
+else:
+    print("Neither image was found.")
+    textStatus = 'Due'
+
+# Taking the Current 
+if textStatus == 'Due':
+    # Get all the text data to be used as a prompt
+    pass
+elif textStatus == 'Waiting':
+    # do nothing
+    pass
