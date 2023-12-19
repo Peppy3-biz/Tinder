@@ -14,6 +14,11 @@ while location == False:
         center = pyautogui.center(location)
         pyautogui.click(center)
         lastLocation = location
+    # Check if 'q' key is pressed
+    if is_pressed('q'):
+        print("You pressed 'q'. Exiting the loop.")
+        break
+    sleep(.01)
 
 while True:
     location = pyautogui.locateOnScreen(tinyTarget, region=searchRegion, confidence=0.6)
