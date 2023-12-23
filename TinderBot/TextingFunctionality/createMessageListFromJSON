@@ -1,0 +1,204 @@
+import json
+from datetime import datetime
+import pytz
+
+# JSON data
+json_data = '''
+{
+    "meta": {
+        "status": 200
+    },
+    "data": {
+        "messages": [
+            {
+                "_id": "657c7fd1c67398010032925a",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-15T16:33:21.000Z",
+                "message": "We can meet",
+                "to": "60bcf148a9299501009bc35b",
+                "from": "5d2f511df3824a1600623506",
+                "created_date": "2023-12-15T16:33:21.000Z",
+                "timestamp": 1702658001000,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c22b2ed5dd0100128979",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:39:39.277Z",
+                "message": "我在浦东",
+                "to": "5d2f511df3824a1600623506",
+                "from": "60bcf148a9299501009bc35b",
+                "created_date": "2023-12-13T14:39:39.277Z",
+                "timestamp": 1702478379277,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c0f876fdb801008ac4f7",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:34:32.772Z",
+                "message": "杨浦",
+                "to": "60bcf148a9299501009bc35b",
+                "from": "5d2f511df3824a1600623506",
+                "created_date": "2023-12-13T14:34:32.772Z",
+                "timestamp": 1702478072772,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c0e92ed5dd0100126162",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:34:17.371Z",
+                "message": "Maybe you’re the missing piece?",
+                "to": "5d2f511df3824a1600623506",
+                "from": "60bcf148a9299501009bc35b",
+                "created_date": "2023-12-13T14:34:17.371Z",
+                "timestamp": 1702478057371,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c0e1ee01a701006da2f7",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:34:09.146Z",
+                "message": "I don’t see you there",
+                "to": "5d2f511df3824a1600623506",
+                "from": "60bcf148a9299501009bc35b",
+                "created_date": "2023-12-13T14:34:09.146Z",
+                "timestamp": 1702478049146,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c0bc77b30d0100972248",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:33:32.172Z",
+                "message": "your heart",
+                "to": "60bcf148a9299501009bc35b",
+                "from": "5d2f511df3824a1600623506",
+                "created_date": "2023-12-13T14:33:32.172Z",
+                "timestamp": 1702478012172,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c0ac4f849e0100b8fffa",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:33:16.745Z",
+                "message": "hahh",
+                "to": "60bcf148a9299501009bc35b",
+                "from": "5d2f511df3824a1600623506",
+                "created_date": "2023-12-13T14:33:16.745Z",
+                "timestamp": 1702477996745,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c099071c880100be1c26",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:32:57.361Z",
+                "message": "Why do I never see you. Where are you hiding? \uD83E\uDDD0",
+                "to": "5d2f511df3824a1600623506",
+                "from": "60bcf148a9299501009bc35b",
+                "created_date": "2023-12-13T14:32:57.361Z",
+                "timestamp": 1702477977361,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c08f7de28a0100f92693",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:32:47.257Z",
+                "message": "一样",
+                "to": "5d2f511df3824a1600623506",
+                "from": "60bcf148a9299501009bc35b",
+                "created_date": "2023-12-13T14:32:47.257Z",
+                "timestamp": 1702477967257,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c071071c880100be1725",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:32:17.360Z",
+                "message": "where are you",
+                "to": "60bcf148a9299501009bc35b",
+                "from": "5d2f511df3824a1600623506",
+                "created_date": "2023-12-13T14:32:17.360Z",
+                "timestamp": 1702477937360,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c0574f849e0100b8f5b5",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:31:51.550Z",
+                "message": "yes",
+                "to": "60bcf148a9299501009bc35b",
+                "from": "5d2f511df3824a1600623506",
+                "created_date": "2023-12-13T14:31:51.550Z",
+                "timestamp": 1702477911550,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579c02407af7101005d2d78",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:31:00.798Z",
+                "message": "Shanghai?",
+                "to": "5d2f511df3824a1600623506",
+                "from": "60bcf148a9299501009bc35b",
+                "created_date": "2023-12-13T14:31:00.798Z",
+                "timestamp": 1702477860798,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            },
+            {
+                "_id": "6579bf5625aa7b010007552e",
+                "match_id": "5d2f511df3824a160062350660bcf148a9299501009bc35b",
+                "sent_date": "2023-12-13T14:27:34.166Z",
+                "message": "❤️",
+                "to": "60bcf148a9299501009bc35b",
+                "from": "5d2f511df3824a1600623506",
+                "created_date": "2023-12-13T14:27:34.166Z",
+                "timestamp": 1702477654166,
+                "is_liked": true,
+                "matchId": "5d2f511df3824a160062350660bcf148a9299501009bc35b"
+            }
+        ]
+    }
+}
+'''
+
+# Function to convert timestamp to China Standard Time and format it
+def format_timestamp(timestamp):
+    cst = pytz.timezone('Asia/Shanghai')
+    return datetime.fromtimestamp(timestamp / 1000, cst).strftime('%B %d, %H:%M')
+
+# Function to parse messages and create formatted strings
+def parse_messages(json_str):
+    parsed_json = json.loads(json_str)
+    messages = parsed_json['data']['messages']
+    
+    formatted_messages = []
+    for message in messages:
+        when = str(format_timestamp(message['timestamp']))
+        who = "Me:" if message['from'] == "60bcf148a9299501009bc35b" else "Her:"
+        msg_content = message['message']
+
+        # Special cases for the message content
+        if msg_content == "微信：Peppy3_":
+            msg_content = "[WeChat Contact]"
+        elif 'contact_card' in message:
+            msg_content = "[Alert]"
+
+        formatted_message = f"{when} {who} {msg_content}\n"
+        formatted_messages.append(formatted_message)
+    
+    return formatted_messages
+
+# Call the function and print the result
+formatted_messages_list = parse_messages(json_data)
+formatted_messages_list[:5]  # Displaying first 5 messages for brevity
+
+print(formatted_messages_list)
+
+
+correctOrder = [message for message in reversed(formatted_messages_list)]
+fullString = ''
+for message in correctOrder:
+    fullString += str(message)
+# handle emojis
+encodedString = fullString.encode('utf-16', 'surrogatepass')
+decodedString = encodedString.decode('utf-16', 'surrogatepass')
+print(decodedString)
+# Full convo in order

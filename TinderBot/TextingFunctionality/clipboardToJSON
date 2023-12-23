@@ -1,0 +1,17 @@
+import pyperclip
+import json
+
+def save_clipboard_to_json(file_path):
+    # Get text from clipboard
+    clipboard_text = pyperclip.paste()
+
+    # Prepare the data to be JSON-serializable
+    data = {'clipboardText': clipboard_text}
+
+    # Write data to a JSON file
+    with open(file_path, 'w', encoding='utf-8') as file:
+        json.dump(data, file, ensure_ascii=False, indent=4)
+
+# Usage
+json_file_path = 'clipboard_content.json'
+save_clipboard_to_json(json_file_path)

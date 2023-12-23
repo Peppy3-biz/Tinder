@@ -2,13 +2,18 @@ import pyautogui
 import pygetwindow as gw
 from pywinauto.application import Application
 from time import sleep
+import pyperclip
+from sys import exit
 
+window_name = ''
 # Find the window
 for window in gw.getAllTitles():
     if "Tinder | Dating," in window:
         window_name = window
-if not window_name:
+
+if window_name == '':
     print("Tinder not found")
+    exit()
 
 # Open the window 
 window = gw.getWindowsWithTitle(window_name)[0]
@@ -20,7 +25,7 @@ if window is not None:
     app_window.set_focus()
 
 
-
+# Click something function
 def click(image, confidenceLevel):
     thingLocation = pyautogui.locateOnScreen(image, confidence=confidenceLevel)
     if thingLocation:
@@ -30,16 +35,24 @@ def click(image, confidenceLevel):
 
 
 
+# Exit DevTools if open
+if click(r"C:\Users\Unhap\OneDrive\Documents\GitHub\Tinder\TinderBot\TextingFunctionality\imageReferences\exitDevTools.png", .99) == 'not found':
+    devToolsStatus = 'closed'
+    sleep(1.7)
+else:
+    devToolsStatus = 'open'
 
-
-networkImage = r"C:\Users\Unhap\OneDrive\Documents\GitHub\Tinder\TinderBot\TextingFunctionality\imageReferences\networkTab.png"
-messagesImage = r"C:\Users\Unhap\OneDrive\Documents\GitHub\Tinder\TinderBot\TextingFunctionality\imageReferences\lightenedMessagesJSON.png"
-if click(networkImage, .9) == 'not found':
-    pyautogui.hotkey('ctrl', 'shift', 'i')
-    sleep(1)
-    if click(networkImage, .9):
-        print("Error: Can't find Network Tab")
-
-# Refresh the page to get Network Data
-pyautogui.press('f5')
-
+# Move mouse to bio
+pyautogui.moveTo(1460, 760)
+# Scroll to top
+pyautogui.scroll(2000)
+sleep(1.1)
+# Click and hold
+pyautogui.mouseDown(button='left')
+pyautogui.moveTo(1895, 1010)
+sleep(1)
+pyautogui.mouseUp(button='left')
+pyautogui.hotkey('ctrl', 'c')
+bio = pyperclip.paste()
+sleep(1)
+print(bio)
