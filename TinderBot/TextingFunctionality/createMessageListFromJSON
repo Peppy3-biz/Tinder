@@ -156,8 +156,16 @@ json_data = '''
             }
         ]
     }
-}
-'''
+}'''
+
+import json
+from datetime import datetime
+import pytz
+import pyperclip
+
+# JSON data extracted from clipboard
+json_data = '''{}
+'''.format(pyperclip.paste())
 
 # Function to convert timestamp to China Standard Time and format it
 def format_timestamp(timestamp):
